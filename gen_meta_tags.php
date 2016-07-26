@@ -1,17 +1,24 @@
-<?
+<?php
 
+	/**
+	* GENERATION META TAGS
+	*/
+	
 	function gen_meta_tags($key = null, $value = null, $type = 'meta') {
 		
 		static $metatags = '';
 		
-		if ($value == null){
+		if ($key == null){
 			echo $metatags;
 		}
 		elseif ($type == 'meta') {
-			$metatags .= gen_meta($key, $value);	 
+			$metatags .= gen_meta_tag($key, $value);	 
 		}
 		elseif ($type == 'ogmeta'){
-			$metatags .= gen_ogmeta($key, $value);
+			$metatags .= gen_ogmeta_tag($key, $value);
+		}
+		elseif ($type == 'tag'){
+			$metatags .= gen_tag($tag, $value);	
 		}	
 
 		return True;
@@ -20,7 +27,7 @@
 
 	function express_gen_meta_tags ($title, $description, $img, $url = ''){
 		
-		gen_meta_tags('title', $title);
+		gen_meta_tags('title', $title, 'tag');
 		gen_meta_tags('description', $description);
 		
 		/** twitter*/
@@ -48,8 +55,8 @@
 		return '<meta property="'.$key.'" content="'.$value.'">';						
 	}
 
-	function gen_title_tag($value){
-		return '<title>'.$value.'</title>';
+	function gen_tag($tag, $value){
+		return '<'.$tag.'>'.$value.'</'.$tag.'>';
 	}
 
 	
