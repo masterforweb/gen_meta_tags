@@ -49,7 +49,7 @@
 	{
 		
 		if (trim($value) !== '')
-			return '<meta name="'.$key.'" content="'.$value.'">';
+			return '<meta name="'.$key.'" content="'.htmlspecialchars_decode($value).'">';
 		else
 			return '';
 
@@ -59,7 +59,7 @@
 	{
 		
 		if (trim($value) !== '')
-			return '<meta property="'.$key.'" content="'.$value.'">';
+			return '<meta property="'.$key.'" content="'.htmlspecialchars_decode($value).'">';
 		else
 			return '';
 
