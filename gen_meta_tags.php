@@ -4,7 +4,7 @@
 	* GENERATION META TAGS
 	*/
 	
-	function gen_meta_tags($key = null, $value = null, $type = 'meta') {
+	function gen_meta_tags($key = null, $value = '', $type = 'meta') {
 		
 		static $metatags = '';
 		
@@ -18,14 +18,14 @@
 			$metatags .= gen_ogmeta_tag($key, $value);
 		}
 		elseif ($type == 'tag'){
-			$metatags .= gen_tag($tag, $value);	
+			$metatags .= gen_tag($key, $value);	
 		}	
 
 		return True;
 
 	}
 
-	function express_gen_meta_tags ($title, $description, $img, $url = ''){
+	function express_gen_meta_tags ($title, $description, $img = '', $url = ''){
 		
 		gen_meta_tags('title', $title, 'tag');
 		gen_meta_tags('description', $description);
@@ -39,7 +39,7 @@
 		gen_meta_tags('og:title', $title);
 		gen_meta_tags('og:url', $url);
 		gen_meta_tags('og:description', $description);
-		gen_meta_tags('og:image', $image);
+		gen_meta_tags('og:image', $img);
 
 	}
 
@@ -47,16 +47,31 @@
 
 	function gen_meta_tag($key = '', $value = '')
 	{
-		return '<meta name="'.$key.'" content="'.$value.'">';						
+		
+		if (trim($value) !== '')
+			return '<meta name="'.$key.'" content="'.$value.'">';
+		else
+			return '';
+
 	}
 
 	function gen_ogmeta_tag($key = '', $value = '')
 	{
-		return '<meta property="'.$key.'" content="'.$value.'">';						
+		
+		if (trim($value) !== '')
+			return '<meta property="'.$key.'" content="'.$value.'">';
+		else
+			return '';
+
 	}
 
 	function gen_tag($tag, $value){
-		return '<'.$tag.'>'.$value.'</'.$tag.'>';
+		
+		if (trim($value) !== '')
+			return '<'.$tag.'>'.$value.'</'.$tag.'>';
+		else
+			return '';
+
 	}
 
 	
